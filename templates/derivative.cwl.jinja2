@@ -1,5 +1,6 @@
 # For derivative v1.1 (2021/06/03) by Simon Jensen.
 # URL: https://ctan.org/pkg/derivative?lang=en
+# Created by Brian Schubert (2021/08/03).
 
 #include:xparse
 
@@ -9,24 +10,23 @@
 {% set macro_dv = ('pdv', 'odv', 'mdv', 'fdv', 'adv', 'jdv') %}
 {% set macro_dif = ('pdif', 'odif', 'mdif', 'fdif', 'adif') -%}
 
-## Derivatives and Other Derivatives (section 1-1.1)
+## Derivatives and Other Derivatives (section 1)
 {% for cmd in macro_dv %}
     {% for star in ('', '*') %}
         {% for options in ('[keyvals]', '') %}
-            {% for points in ('', '_{pt1%formula}^{pt2%formula}') %}
-                {% for slash in ('', '/') -%}
-                    \{{ cmd }}{{ star }}{{ options }}{function%formula}{{ slash }}{variables%formula}{{ points }}#m
-                {% endfor %}
-            {% endfor %}
+\{{ cmd }}{{ star }}{{ options }}{function%formula}/{variables%formula}_{pt1%formula}^{pt2%formula}#*m {# only in all +#}
+\{{ cmd }}{{ star }}{{ options }}{function%formula}{variables%formula}_{pt1%formula}^{pt2%formula}#m
+\{{ cmd }}{{ star }}{{ options }}{function%formula}/{variables%formula}#m
+\{{ cmd }}{{ star }}{{ options }}{function%formula}{variables%formula}#m
         {% endfor %}
     {% endfor %}
 {% endfor %}
 
-## Differentials and Other Derivatives (section 2-2.1)
+## Differentials and Other Differentials (section 2)
 {% for cmd in macro_dif %}
     {% for star in ('', '*') %}
-        {% for options in ('[keyvals]', '') -%}
-            \{{ cmd }}{{ star }}{{ options }}{variables%formula}#m
+        {% for options in ('[keyvals]', '') %}
+\{{ cmd }}{{ star }}{{ options }}{variables%formula}#m
         {% endfor %}
     {% endfor %}
 {% endfor %}
