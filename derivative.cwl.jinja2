@@ -1,0 +1,175 @@
+# For derivative v1.1 (2021/06/03) by Simon Jensen.
+# URL: https://ctan.org/pkg/derivative?lang=en
+
+#include:xparse
+
+{% set declaration_prefixes = ('New', 'Renew', 'Provide', 'Declare') %}
+{% set declaration_dv = declaration_prefixes|map('addsuffix', 'Derivative')|list %}
+{% set declaration_dif = declaration_prefixes|map('addsuffix', 'Differential')|list %}
+{% set macro_dv = ('pdv', 'odv', 'mdv', 'fdv', 'adv', 'jdv') %}
+{% set macro_dif = ('pdif', 'odif', 'mdif', 'fdif', 'adif') -%}
+
+## Derivatives and Other Derivatives (section 1-1.1)
+{% for cmd in macro_dv %}
+    {% for star in ('', '*') %}
+        {% for options in ('[keyvals]', '') %}
+            {% for points in ('', '_{pt1%formula}^{pt2%formula}') %}
+                {% for slash in ('', '/') -%}
+                    \{{ cmd }}{{ star }}{{ options }}{function%formula}{{ slash }}{variables%formula}{{ points }}#m
+                {% endfor %}
+            {% endfor %}
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+
+## Differentials and Other Derivatives (section 2-2.1)
+{% for cmd in macro_dif %}
+    {% for star in ('', '*') %}
+        {% for options in ('[keyvals]', '') -%}
+            \{{ cmd }}{{ star }}{{ options }}{variables%formula}#m
+        {% endfor %}
+    {% endfor %}
+{% endfor %}
+
+
+## Options (section 3)
+\derivset{derivative%formula}[keyvals]
+
+{% set dv_key_cmds -%}
+\derivset,{{ declaration_dv|map('addprefix', '\\')|join(',') }},{{ macro_dv|map('addprefix', '\\')|join(',') }}
+{%- endset %}
+## Derivative options (section 3.3)
+### Derivative Style (style-)
+#keyvals:{{ dv_key_cmds }}
+style-inf=%<infinitesimal%>
+style-frac=%<frac macro%>
+style-frac-/=%<slashfrac macro%>
+style-var=#single,multiple
+#endkeyvals
+### Derivative Scaling (scale-)
+#keyvals:{{ dv_key_cmds }}
+scale-eval=#auto,none,big,Big,bigg,Bigg
+scale-eval-/=#auto,none,big,Big,bigg,Bigg
+scale-fun=#auto,none,big,Big,bigg,Bigg
+scale-var=#auto,none,big,Big,bigg,Bigg
+scale-frac=#auto,none,big,Big,bigg,Bigg
+scale-frac-/=#auto,none,big,Big,bigg,Bigg
+#endkeyvals
+### Derivative Delimiters (scale-)
+#keyvals:{{ dv_key_cmds }}
+{% set lrdelims -%}{% raw %}{%<left delim%>}{%<right delim%>}{% endraw %}{%- endset %}
+delims-eval=#{{ lrdelims }}
+delims-eval-/=#{{ lrdelims }}
+delims-fun=#{{ lrdelims }}
+delims-var=#{{ lrdelims }}
+delims-frac=#{{ lrdelims }}
+delims-frac-/=#{{ lrdelims }}
+#endkeyvals
+### Derivative Math Spacing (sep-)
+#keyvals:{{ dv_key_cmds }}
+sep-inf-ord=
+sep-inf-fun=
+sep-ord-func=
+sep-frac-fun=
+sep-inf-var=
+sep-var-ord=
+sep-var-inf=
+sep-ord-inf=
+sep-var-var=
+sep-eval-sb=
+sep-eval-sp=
+#endkeyvals
+### Derivative Switches (switch-)
+#keyvals:{{ dv_key_cmds }}
+switch-*#true,false
+switch-/#true,false
+#endkeyvals
+### Derivative Sort (sort-)
+#keyvals:{{ dv_key_cmds }}
+sort-method=#abs,number,sign,symbol
+sort-method={{ '{' }}%<algorithm list%>}
+sort-numerical=#auto,first,last,symbolic
+sort-abs-reverse#true,false
+sort-number-reverse#true,false
+sort-sign-reverse#true,false
+sort-symbol-reverse#true,false
+#endkeyvals
+### Derivative Miscellaneous
+#keyvals:{{ dv_key_cmds }}
+fun#true,false
+frac#true,false
+var
+var=#none,all,{{ '{' }}%<cs-numbers%>}
+order=#{{ '{' }}%<cs-orders%>}
+ord=#{{ '{' }}%<cs-orders%>}
+mixed-order={{ '{' }}%<mixed order%>}
+mixord={{ '{' }}%<mixed order%>}
+#endkeyvals
+
+{% set dif_key_cmds -%}
+\derivset,{{ declaration_dif|map('addprefix', '\\')|join(',') }},{{ macro_dif|map('addprefix', '\\')|join(',') }}
+{%- endset %}
+## Differential options (section 3.4)
+### Differential Style (style-)
+#keyvals:{{ dif_key_cmds }}
+style-inf=#%<infinitesimal%>
+style-notation=#single,multiple,mixed
+style-notation-*=#single,multiple,mixed
+#endkeyvals
+### Differential Scaling (scale-)
+#keyvals:{{ dif_key_cmds }}
+scale-var=#auto,none,big,Big,bigg,Bigg
+scale-var-*=#auto,none,big,Big,bigg,Bigg
+#endkeyvals
+### Differential Delimiters (delim-)
+#keyvals:{{ dif_key_cmds }}
+delims-var=#{{ lrdelims }}
+delims-var-*=#{{ lrdelims }}
+#endkeyvals
+### Differential Math Spacing (sep-)
+#keyvals:{{ dif_key_cmds }}
+sep-begin=
+sep-inf-ord=
+sep-inf-var=
+sep-ord-var=
+sep-var-inf=
+sep-var-var=
+sep-ord-ord=
+sep-end=
+#endkeyvals
+### Differential Switches (switch-)
+#keyvals:{{ dif_key_cmds }}
+switch-*=#true,false
+#endkeyvals
+### Differential Miscellaneous
+#keyvals:{{ dif_key_cmds }}
+var
+var=#none,all,{{ '{' }}%<cs-numbers%>}
+order=#{{ '{' }}%<cs-orders%>}
+ord=#{{ '{' }}%<cs-orders%>}
+#endkeyvals
+
+## All derivatives and differentials options (section 3.5)
+#keyvals:\derivset
+scale-auto=#leftright,mleftright
+#endkeyvals
+
+## Defining variants (section 4)
+{% for cmd in declaration_dv -%}
+    \{{ cmd }}{cmd}{infinitesimal%formula}[keyvals]#nd
+{% endfor %}
+{% for cmd in declaration_dif -%}
+    \{{ cmd }}{cmd}{infinitesimal%formula}[keyvals]#nd
+{% endfor %}
+
+# Micellaneous (section 6)
+\slashfrac[scale%keyvals]{numerator}{denominator}
+# Note: as of v1.1, ths scale argument is still subject to change.
+#keyvals:\slashfrac
+auto
+none
+big
+Big
+bigg
+Bigg
+#endkeyvals
