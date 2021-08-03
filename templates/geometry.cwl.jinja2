@@ -1,0 +1,85 @@
+# For geometry v5.9 (2020/01/02) by Hideo Umeki.
+# URL: https://ctan.org/pkg/geometry
+# Created by Brian Schubert (2021/08/03)
+{% set class_len = '##L' %}
+{% set class_bool = '#true,false' %}
+
+## User Interface (section 4)
+\geometry{options%keyvals}
+\newgeometry{options%keyvals}
+\restoregeometry
+\savegeometry{name}#s#%geometry
+\loadgeometry{name%keyvals}
+#keyvals:\loadgeometry
+%geometry
+#endkeyvals
+
+{% set geometry_cmds -%}\geometry,\newgeometry{% endset %}
+{% set paper_types = [
+    'a0paper', 'a1paper', 'a2paper', 'a3paper', 'a4paper', 'a5paper', 'a6paper',
+    'b0paper', 'b1paper', 'b2paper', 'b3paper', 'b4paper', 'b5paper', 'b6paper',
+    'c0paper', 'c1paper', 'c2paper', 'c3paper', 'c4paper', 'c5paper', 'c6paper',
+    'b0j', 'b1j', 'b2j', 'b3j', 'b4j', 'b5j', 'b6j',
+    'ansiapaper', 'ansibpaper', 'ansicpaper', 'ansidpaper', 'ansiepaper',
+    'letterpaper', 'executivepaper', 'legalpaper'
+] %}
+## Paper size (section 5.1)
+#keyvals:{{ geometry_cmds }}
+paper=#{{ paper_types|join(',') }}
+{% for p in paper_types %}
+{{ p }}
+{% endfor %}
+screen
+paperwidth={{ class_len }}
+paperheight={{ class_len }}
+papersize={{ class_len }}
+papersize={{ '{' }}%<width%>,%<height%>}#c
+landscape
+portrait
+#endkeyvals
+
+## Layout size (section 5.2)
+#keyvals:{{ geometry_cmds }}
+layout=#{{ paper_types|join(',') }}
+layoutwidth={{ class_len }}
+layoutheight={{ class_len }}
+layoutsize={{ class_len }}
+layoutsize={{ '{' }}%<width%>,%<height%>}#c
+layouthoffset={{ class_len }}
+layoutvoffset={{ class_len }}
+layoutoffset={{ class_len }}
+layoutoffset={{ '{' }}%<hoffset%>,%<voffset%>}#c
+#endkeyvals
+
+## Body size (section 5.3)
+#keyvals:{{ geometry_cmds }}
+hscale=%<scale%>
+vscale=%<scale%>
+scale=%<scale%>
+scale={{ '{' }}%<hscale%>,%<vscale%>}#c
+width={{ class_len }}
+totalwidth={{ class_len }}
+height={{ class_len }}
+totalheight={{ class_len }}
+total={{ class_len }}
+total={{ '{' }}%<width%>,%<height%>}#c
+textwidth={{ class_len }}
+textheight={{ class_len }}
+text={{ class_len }}
+body={{ '{' }}%<width%>,%<height%>}#c
+lines=%<integer%>
+{% for prefix in ('include', 'ignore') %}
+    {% for name in ('head', 'foot', 'headfoot', 'mp', 'all') %}
+{{ prefix }}{{ name }}{{ class_bool }}
+    {% endfor %}
+{% endfor %}
+heightrounded{{ class_bool }}
+hdivide={{ '{' }}%<left margin%>, %<width%>, %<right margin%>}
+vdivide={{ '{' }}%<top margin%>, %<height%>, %<bottom margin%>}
+divide={{ '{' }}%<left/top margin%>, %<height/width%>, %<right/bottom margin%>}
+#endkeyvals
+
+## Margin size (section 5.4)
+#keyvals:{{ geometry_cmds }}
+
+#endkeyvals
