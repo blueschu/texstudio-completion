@@ -31,7 +31,6 @@
     {% endfor %}
 {% endfor %}
 
-
 ## Options (section 3)
 \derivset{derivative%formula}[options%keyvals]
 
@@ -55,7 +54,7 @@ scale-var=#auto,none,big,Big,bigg,Bigg
 scale-frac=#auto,none,big,Big,bigg,Bigg
 scale-frac-/=#auto,none,big,Big,bigg,Bigg
 #endkeyvals
-### Derivative Delimiters (scale-)
+### Derivative Delimiters (delim-)
 #keyvals:{{ dv_key_cmds }}
 {% set lrdelims -%}{% raw %}{%<left delim%>}{%<right delim%>}{% endraw %}{%- endset %}
 delims-eval={{ lrdelims }}#c
