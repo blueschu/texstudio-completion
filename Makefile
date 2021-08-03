@@ -1,15 +1,15 @@
 OUTPUT_DIR := output
+TEMPLATE_DIR := templates
 RENDER_JINJA2 := python3 ./render_template.py
 
-TEMPLATE_FILES = $(wildcard *.jinja2)
-TARGET_FILES := $(patsubst %.jinja2,$(OUTPUT_DIR)/%,$(TEMPLATE_FILES))
+TEMPLATE_FILES = $(wildcard $(TEMPLATE_DIR)/*.jinja2)
+TARGET_FILES := $(patsubst $(TEMPLATE_DIR)/%.jinja2,$(OUTPUT_DIR)/%,$(TEMPLATE_FILES))
 
 # Rule for generating rendering Jinja2 files.
 # $(OUT_DIR) is listed as an order-only prerequisite so that changes
 # to the directory don't force all .cwl files to be re-compiled.
-$(OUTPUT_DIR)/%: %.jinja2 | $(OUTPUT_DIR)
+$(OUTPUT_DIR)/%: $(TEMPLATE_DIR)/%.jinja2 | $(OUTPUT_DIR)
 	$(RENDER_JINJA2) $< > $@
-
 
 .PHONY: all list_templates
 
