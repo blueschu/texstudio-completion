@@ -3,6 +3,13 @@
 # Created by Brian Schubert (2021/08/03)
 {% set class_len = '##L' %}
 {% set class_bool = '#true,false' %}
+{% macro cursor_list() -%}
+    {
+    {%- for arg in varargs -%}
+        %<{{ arg }}%>{% if not loop.last %},{% endif %}
+    {%- endfor -%}
+    }
+{%- endmacro %}
 
 ## User Interface (section 4)
 \geometry{options%keyvals}
@@ -23,9 +30,10 @@
     'ansiapaper', 'ansibpaper', 'ansicpaper', 'ansidpaper', 'ansiepaper',
     'letterpaper', 'executivepaper', 'legalpaper'
 ] %}
-## Paper size (section 5.1)
-#keyvals:{{ geometry_cmds }}
+## Paper size (section 5.1) (not available for \newgeometry)
+#keyvals:\geometry
 paper=#{{ paper_types|join(',') }}
+papername=#{{ paper_types|join(',') }}
 {% for p in paper_types %}
 {{ p }}
 {% endfor %}
@@ -33,9 +41,9 @@ screen
 paperwidth={{ class_len }}
 paperheight={{ class_len }}
 papersize={{ class_len }}
-papersize={{ '{' }}%<width%>,%<height%>}#c
-landscape
-portrait
+papersize={{ cursor_list('width', 'height') }}
+landscape{{ class_bool }}
+portrait{{ class_bool }}
 #endkeyvals
 
 ## Layout size (section 5.2)
@@ -44,11 +52,11 @@ layout=#{{ paper_types|join(',') }}
 layoutwidth={{ class_len }}
 layoutheight={{ class_len }}
 layoutsize={{ class_len }}
-layoutsize={{ '{' }}%<width%>,%<height%>}#c
+layoutsize={{ cursor_list('width', 'height') }}
 layouthoffset={{ class_len }}
 layoutvoffset={{ class_len }}
 layoutoffset={{ class_len }}
-layoutoffset={{ '{' }}%<hoffset%>,%<voffset%>}#c
+layoutoffset={{ cursor_list('hoffset', 'voffset') }}
 #endkeyvals
 
 ## Body size (section 5.3)
@@ -138,16 +146,16 @@ reversemarginpar{{ class_bool }}
     'dvips', 'dvipdfm', 'pdftex', 'luatex', 'xetex',  'vtex',
     'dvipdfmx', 'xdvipdfmx',
 ] %}
-## Drivers (section 5.6)
-#keyvals:{{ geometry_cmds }}
+## Drivers (section 5.6) (not available for \newgeometry)
+#keyvals:\geometry
 driver=#auto,none,{{ drivers|join(',') }}
 {% for d in drivers -%}
 {{ d }}
 {% endfor %}
 #endkeyvals
 
-## Other options (section 5.7)
-#keyvals:{{ geometry_cmds }}
+## Other options (section 5.7) (not available for \newgeometry)
+#keyvals:\geometry
 verbose{{ class_bool }}
 reset{{ class_bool }}
 mag=%<magnification%>
