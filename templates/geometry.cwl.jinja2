@@ -133,3 +133,15 @@ twoside{{ class_bool }}
 reversemp{{ class_bool }}
 reversemarginpar{{ class_bool }}
 #endkeyvals
+
+{% set drivers = [
+    'dvips', 'dvipdfm', 'pdftex', 'luatex', 'xetex',  'vtex',
+    'dvipdfmx', 'xdvipdfmx',
+] %}
+## Drivers (section 5.6)
+#keyvals:{{ geometry_cmds }}
+driver=#auto,none,{{ drivers|join(',') }}
+{% for d in drivers -%}
+{{ d }}
+{% endfor %}
+#endkeyvals
