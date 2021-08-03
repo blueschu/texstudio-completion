@@ -81,5 +81,30 @@ divide={{ '{' }}%<left/top margin%>, %<height/width%>, %<right/bottom margin%>}
 
 ## Margin size (section 5.4)
 #keyvals:{{ geometry_cmds }}
-
+{% for key in (
+    'left', 'lmargin', 'inner',
+    'right', 'rmargin', 'outer',
+    'top', 'tmargin',
+    'bottom', 'bmargin',
+) -%}
+{{ key }}={{ class_len }}
+{% endfor %}
+hmargin={{ class_len }}
+hmargin={{ '{' }}%<left margin%>,%<right margin%>}#c
+vmargin={{ class_len }}
+vmargin={{ '{' }}%<top margin%>,%<bottom margin%>}#c
+margin={{ '{' }}%<left/top margin%>,%<right/bottom margin%>}#c
+margin={{ class_len }}
+hmarginratio=<%left%>:%<right%>
+vmarginratio=<%top%>:%<bottom%>
+marginratio={{ '{' }}<%left%>:%<right%>,<%top%>:%<bottom%>}#c
+marginratio=<%left/top%>:%<right/bottom%>
+ratio={{ '{' }}<%left%>:%<right%>,<%top%>:%<bottom%>}#c
+ratio=<%left/top%>:%<right/bottom%>
+hcentering{{ class_bool }}
+vcentering{{ class_bool }}
+centering{{ class_bool }}
+twoside{{ class_bool }}
+asymmetric{{ class_bool }}
+bindingoffset={{ class_len }}
 #endkeyvals
