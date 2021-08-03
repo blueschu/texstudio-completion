@@ -41,9 +41,9 @@
 ## Derivative options (section 3.3)
 ### Derivative Style (style-)
 #keyvals:{{ dv_key_cmds }}
-style-inf=%<infinitesimal%>
-style-frac=%<frac macro%>
-style-frac-/=%<slashfrac macro%>
+style-inf=%<infinitesimal%>#c
+style-frac=%<frac macro%>#c
+style-frac-/=%<slashfrac macro%>#c
 style-var=#single,multiple
 #endkeyvals
 ### Derivative Scaling (scale-)
@@ -58,12 +58,12 @@ scale-frac-/=#auto,none,big,Big,bigg,Bigg
 ### Derivative Delimiters (scale-)
 #keyvals:{{ dv_key_cmds }}
 {% set lrdelims -%}{% raw %}{%<left delim%>}{%<right delim%>}{% endraw %}{%- endset %}
-delims-eval=#{{ lrdelims }}
-delims-eval-/=#{{ lrdelims }}
-delims-fun=#{{ lrdelims }}
-delims-var=#{{ lrdelims }}
-delims-frac=#{{ lrdelims }}
-delims-frac-/=#{{ lrdelims }}
+delims-eval=#{{ lrdelims }}#c
+delims-eval-/=#{{ lrdelims }}#c
+delims-fun=#{{ lrdelims }}#c
+delims-var=#{{ lrdelims }}#c
+delims-frac=#{{ lrdelims }}#c
+delims-frac-/=#{{ lrdelims }}#c
 #endkeyvals
 ### Derivative Math Spacing (sep-)
 #keyvals:{{ dv_key_cmds }}
@@ -87,7 +87,7 @@ switch-/#true,false
 ### Derivative Sort (sort-)
 #keyvals:{{ dv_key_cmds }}
 sort-method=#abs,number,sign,symbol
-sort-method={{ '{' }}%<algorithm list%>}
+sort-method={{ '{' }}%<algorithm list%>}#c
 sort-numerical=#auto,first,last,symbolic
 sort-abs-reverse#true,false
 sort-number-reverse#true,false
@@ -100,10 +100,10 @@ fun#true,false
 frac#true,false
 var
 var=#none,all,{{ '{' }}%<cs-numbers%>}
-order=#{{ '{' }}%<cs-orders%>}
-ord=#{{ '{' }}%<cs-orders%>}
-mixed-order={{ '{' }}%<mixed order%>}
-mixord={{ '{' }}%<mixed order%>}
+order=#{{ '{' }}%<cs-orders%>}#c
+ord=#{{ '{' }}%<cs-orders%>}#c
+mixed-order={{ '{' }}%<mixed order%>}#c
+mixord={{ '{' }}%<mixed order%>}#c
 #endkeyvals
 
 {% set dif_key_cmds -%}
@@ -112,7 +112,7 @@ mixord={{ '{' }}%<mixed order%>}
 ## Differential options (section 3.4)
 ### Differential Style (style-)
 #keyvals:{{ dif_key_cmds }}
-style-inf=#%<infinitesimal%>
+style-inf=#%<infinitesimal%>#c
 style-notation=#single,multiple,mixed
 style-notation-*=#single,multiple,mixed
 #endkeyvals
@@ -123,8 +123,8 @@ scale-var-*=#auto,none,big,Big,bigg,Bigg
 #endkeyvals
 ### Differential Delimiters (delim-)
 #keyvals:{{ dif_key_cmds }}
-delims-var=#{{ lrdelims }}
-delims-var-*=#{{ lrdelims }}
+delims-var=#{{ lrdelims }}#c
+delims-var-*=#{{ lrdelims }}#c
 #endkeyvals
 ### Differential Math Spacing (sep-)
 #keyvals:{{ dif_key_cmds }}
@@ -145,8 +145,8 @@ switch-*=#true,false
 #keyvals:{{ dif_key_cmds }}
 var
 var=#none,all,{{ '{' }}%<cs-numbers%>}
-order=#{{ '{' }}%<cs-orders%>}
-ord=#{{ '{' }}%<cs-orders%>}
+order=#{{ '{' }}%<cs-orders%>}#c
+ord=#{{ '{' }}%<cs-orders%>}#c
 #endkeyvals
 
 ## All derivatives and differentials options (section 3.5)
