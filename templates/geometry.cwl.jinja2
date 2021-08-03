@@ -121,6 +121,7 @@ bindingoffset={{ class_len }}
 #keyvals:{{ geometry_cmds }}
 headheight={{ class_len }}
 head={{ class_len }}
+headsep={{ class_len }}
 footskip={{ class_len }}
 foot={{ class_len }}
 nohead{{ class_bool }}
@@ -129,12 +130,12 @@ noheadfoot{{ class_bool }}
 footnotesep={{ class_len }}
 marginparwidth={{ class_len }}
 marginparsep={{ class_len }}
-nomarginpar={{ class_len }}
+nomarginpar{{ class_bool }}
 columnsep={{ class_len }}
 hoffset={{ class_len }}
 voffset={{ class_len }}
 offset={{ class_len }}
-offset={{ '{' }}%<hoffset%>,%<voffset%>}#c
+offset={{ cursor_list('hoffset', 'voffset') }}
 twocolumn{{ class_bool }}
 onecolumn{{ class_bool }}
 twoside{{ class_bool }}
