@@ -8,7 +8,7 @@
 {% set declaration_dv = declaration_prefixes|map('addsuffix', 'Derivative')|list %}
 {% set declaration_dif = declaration_prefixes|map('addsuffix', 'Differential')|list %}
 {% set macro_dv = ('pdv', 'odv', 'mdv', 'fdv', 'adv', 'jdv') %}
-{% set macro_dif = ('pdif', 'odif', 'mdif', 'fdif', 'adif') -%}
+{% set macro_dif = ('odif', 'pdif', 'mdif', 'fdif', 'adif') -%}
 
 ## Derivatives and Other Derivatives (section 1)
 {% for cmd in macro_dv %}
@@ -163,8 +163,8 @@ scale-auto=#leftright,mleftright
 {% endfor %}
 
 # Miscellaneous (section 6)
-\slashfrac[scale%keyvals]{numerator}{denominator}
-# Note: as of v1.1, ths scale argument is still subject to change.
+\slashfrac[scale%keyvals]{numerator}{denominator}#m
+# Note: as of v1.1, ths scale argument is still subject to change. See 7.2(ii).
 #keyvals:\slashfrac
 auto
 none
