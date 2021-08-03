@@ -64,17 +64,17 @@ layoutoffset={{ cursor_list('hoffset', 'voffset') }}
 hscale=%<scale%>
 vscale=%<scale%>
 scale=%<scale%>
-scale={{ '{' }}%<hscale%>,%<vscale%>}#c
+scale={{ cursor_list('hscale', 'vscale') }}
 width={{ class_len }}
 totalwidth={{ class_len }}
 height={{ class_len }}
 totalheight={{ class_len }}
 total={{ class_len }}
-total={{ '{' }}%<width%>,%<height%>}#c
+total={{ cursor_list('width', 'height') }}
 textwidth={{ class_len }}
 textheight={{ class_len }}
 text={{ class_len }}
-body={{ '{' }}%<width%>,%<height%>}#c
+body={{ cursor_list('width', 'height') }}
 lines=%<integer%>
 {% for prefix in ('include', 'ignore') %}
     {% for name in ('head', 'foot', 'headfoot', 'mp', 'all') %}
@@ -82,9 +82,9 @@ lines=%<integer%>
     {% endfor %}
 {% endfor %}
 heightrounded{{ class_bool }}
-hdivide={{ '{' }}%<left margin%>, %<width%>, %<right margin%>}
-vdivide={{ '{' }}%<top margin%>, %<height%>, %<bottom margin%>}
-divide={{ '{' }}%<left/top margin%>, %<height/width%>, %<right/bottom margin%>}
+hdivide={{ cursor_list('left margin', 'width', 'right margin') }}
+vdivide={{ cursor_list('top margin', 'height', 'bottom margin') }}
+divide={{ cursor_list('left/top margin', 'width/height', 'right/bottom margin') }}
 #endkeyvals
 
 ## Margin size (section 5.4)
@@ -98,17 +98,17 @@ divide={{ '{' }}%<left/top margin%>, %<height/width%>, %<right/bottom margin%>}
 {{ key }}={{ class_len }}
 {% endfor %}
 hmargin={{ class_len }}
-hmargin={{ '{' }}%<left margin%>,%<right margin%>}#c
+hmargin={{ cursor_list('left margin', 'right margin') }}
 vmargin={{ class_len }}
-vmargin={{ '{' }}%<top margin%>,%<bottom margin%>}#c
-margin={{ '{' }}%<left/top margin%>,%<right/bottom margin%>}#c
+vmargin={{ cursor_list('top margin', 'bottom margin') }}
 margin={{ class_len }}
-hmarginratio=<%left%>:%<right%>
-vmarginratio=<%top%>:%<bottom%>
-marginratio={{ '{' }}<%left%>:%<right%>,<%top%>:%<bottom%>}#c
-marginratio=<%left/top%>:%<right/bottom%>
-ratio={{ '{' }}<%left%>:%<right%>,<%top%>:%<bottom%>}#c
-ratio=<%left/top%>:%<right/bottom%>
+margin={{ cursor_list('left/top margin', 'right/bottom margin') }}
+hmarginratio=%<left%>:%<right%>
+vmarginratio=%<top%>:%<bottom%>
+marginratio={{ '{' }}%<left%>:%<right%>,%<top%>:%<bottom%>}
+marginratio=%<left/top%>:%<right/bottom%>
+ratio={{ '{' }}%<left%>:%<right%>,%<top%>:%<bottom%>}
+ratio=%<left/top%>:%<right/bottom%>
 hcentering{{ class_bool }}
 vcentering{{ class_bool }}
 centering{{ class_bool }}
