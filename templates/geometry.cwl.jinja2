@@ -145,3 +145,14 @@ driver=#auto,none,{{ drivers|join(',') }}
 {{ d }}
 {% endfor %}
 #endkeyvals
+
+## Other options (section 5.7)
+#keyvals:{{ geometry_cmds }}
+verbose{{ class_bool }}
+reset{{ class_bool }}
+mag=%<magnification%>
+truedimen{{ class_bool }}
+pass{{ class_bool }}
+showframe{{ class_bool }}
+showcrop{{ class_bool }}
+#endkeyvals
