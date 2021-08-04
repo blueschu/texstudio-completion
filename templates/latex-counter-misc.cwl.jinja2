@@ -39,7 +39,7 @@
 #endkeyvals
 
 ## latex-document.cwl
-{%- set show_counter = [
+{% set show_counter = [
     'Alph', 'alph', 'arabic', 'fnsymbol', 'Roman', 'roman'
 ] -%}
 {% for cmd in show_counter -%}
@@ -54,8 +54,10 @@
 ## pgfmath.cwl
 \pgfmathsetcounter{{ counter_arg }}{math expression}#*
 \pgfmathaddtocounter{{ counter_arg }}{math expression}#*
+\pgfmathnewcounter{{ counter_arg }}#*
+\pgfmathmakecounterglobal{{ counter_arg }}#*
 
-#keyvals:\pgfmathsetcounter,\pgfmathaddtocounter
+#keyvals:\pgfmathsetcounter,\pgfmathaddtocounter,\pgfmathnewcounter,\pgfmathmakecounterglobal
 %{{ counter_class }}
 {{ latex_counters|join('\n') }}
 #endkeyvals
