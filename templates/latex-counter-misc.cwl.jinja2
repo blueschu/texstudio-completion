@@ -54,7 +54,7 @@
 ## pgfmath.cwl
 \pgfmathsetcounter{{ counter_arg }}{math expression}#*
 \pgfmathaddtocounter{{ counter_arg }}{math expression}#*
-\pgfmathnewcounter{{ counter_arg }}#*
+\pgfmathnewcounter{name}#*s#%{{ counter_class }}
 \pgfmathmakecounterglobal{{ counter_arg }}#*
 
 #keyvals:\pgfmathsetcounter,\pgfmathaddtocounter,\pgfmathnewcounter,\pgfmathmakecounterglobal
