@@ -1,0 +1,63 @@
+# Patches to various cwl files for counter definition class support.
+# Created by Brian Schubert (2021/08/04).
+{% set counter_class = 'counter' %}
+{% set counter_arg = '{counter%keyvals}' %}
+{% set latex_counters = [
+    'part', 'chapter', 'section', 'subsection', 'subsubsection',
+    'paragraph', 'subparagraph',
+    'page', 'figure', 'table', 'footnote', 'mpfootnote',
+    'enumi', 'enumii', 'enumiii', 'enumiv',
+    'equation',
+] %}
+
+## ctex.cwl
+\chinese{{ counter_arg }}
+#keyvals:\chinese
+%{{ counter_class }}
+{{ latex_counters|join('\n') }}
+#endkeyvals
+
+## etoolbox.cwl
+\defcounter{{ counter_arg }}{integer expression}
+#keyvals:\defcounter
+%{{ counter_class }}
+{{ latex_counters|join('\n') }}
+#endkeyvals
+
+## latex-dev.cwl
+\setcounter{{ counter_arg }}{value}#*
+\addtocounter{{ counter_arg }}{value}#*
+\newcounter{name}#*s#%{{ counter_class }}
+\newcounter{name}[counter%keyvals]#*s#%{{ counter_class }}
+\refstepcounter{{ counter_arg }}#*
+\stepcounter{{ counter_arg }}#*
+\usecounter{{ counter_arg }}#*
+\value{{ counter_arg }}#*
+#keyvals:\setcounter,\addtocounter,\newcounter,\refstepcounter,\stepcounter,\usecounter,\value
+%{{ counter_class }}
+{{ latex_counters|join('\n') }}
+#endkeyvals
+
+## latex-document.cwl
+{% set show_counter = [
+    'Alph', 'alph', 'arabic', 'fnsymbol', 'Roman', 'roman'
+] -%}
+{% for cmd in show_counter -%}
+\{{ cmd }}{{ counter_arg }}#*
+{% endfor %}
+\stepcounter{{ counter_arg }}
+#keyvals:{{ show_counter|map('addprefix', '\\')|join(',') }},\stepcounter
+%{{ counter_class }}
+{{ latex_counters|join('\n') }}
+#endkeyvals
+
+## pgfmath.cwl
+\pgfmathsetcounter{{ counter_arg }}{math expression}#*
+\pgfmathaddtocounter{{ counter_arg }}{math expression}#*
+\pgfmathnewcounter{name}#*s#%{{ counter_class }}
+\pgfmathmakecounterglobal{{ counter_arg }}#*
+
+#keyvals:\pgfmathsetcounter,\pgfmathaddtocounter,\pgfmathnewcounter,\pgfmathmakecounterglobal
+%{{ counter_class }}
+{{ latex_counters|join('\n') }}
+#endkeyvals
